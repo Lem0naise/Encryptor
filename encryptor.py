@@ -61,3 +61,5 @@ button2.place(x=200, y=110, anchor = 'center')
 
 delbutton = Button(text = "Clear Last Encryption", command = dellabels, borderwidth=0, bg="pale turquoise", activebackground = "pale turquoise", fg = "red")
 delbutton.place(x=200, y=200, anchor = 'center')
+
+root.mainloop()
