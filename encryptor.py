@@ -1,5 +1,11 @@
-decrypted = b"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,./1234567890 "
-encrypted = b"0896745231`-+=/.,<>?'#~@}{[]zcxbvmnadsgfhjlkpioyurteAZCXBVMNLJIOTY"
+import tkinter as tk
+from tkinter import *
+
+#decrypted = b"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,./1234567890 "
+#encrypted = b"0896745231`-+=/.,<>?'#~@}{[]zcxbvmnadsgfhjlkpioyurteAZCXBVMNLJIOTY"
+
+decrypted = b"abcdefghijklmnopqrstuvwxyz "
+encrypted = b"zcxbvmnlkjhgfasdqewtruyoip "
 
 encrypt_table = bytes.maketrans(decrypted, encrypted)
 decrypt_table = bytes.maketrans(encrypted, decrypted)
@@ -8,18 +14,33 @@ result = ''
 choice = ''
 message = ''
 
-while choice != '0':
-    choice = input("\n Do you want to encrypt or decrypt the message?\n 1 to encrypt, 2 to decrypt or 0 to exit program. ")
+#setting up window and canvas
+root = tk.Tk()
+root.title("Encryptor")
+root.configure(bg= "pale turquoise")
 
-    if choice == '1':
-        message = input('\nEnter message for encryption: ')
-        result = message.translate(encrypt_table)
-        print(result + '\n\n')
+frame = Frame(root)
+root.geometry('600x300')
 
-    elif choice == '2':
-        message = input('\nEnter message to decrypt: ')
-        result = message.translate(decrypt_table)
-        print(result + '\n\n')
+message = StringVar()
+mess = Entry(textvariable = message)
+mess.grid(column = 2, row = 2)
 
-    elif choice != '0':
-        print('You have entered an invalid input, please try again. \n\n')
+def encrypt():
+
+    result = str(message.get()).translate(encrypt_table)
+    res = Label(root, text = result, bg="pale turquoise")
+    print(message)
+    res.grid(row = 3, column = 1)
+
+def decrypt():
+
+    result = str(message.get()).translate(decrypt_table)
+    res = Label(root, text = result, bg="pale turquoise")
+    res.grid(row = 3, column = 2)
+
+button = Button(text="Encrypt", command = encrypt)
+button2 = Button(text="Decrypt", command = decrypt)
+button.grid(row = 1, column = 1)
+button2.grid(row = 1, column = 2)
+
